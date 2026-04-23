@@ -21,8 +21,12 @@ from django.http import JsonResponse
 def health(request):
     return JsonResponse({"status": "ok"})
 
+def trigger_error(request):
+    raise Exception("Erreur de test Sentry !")
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('tasks.urls')),
     path('health/', health),
+    path('sentry-debug/', trigger_error),
 ]
